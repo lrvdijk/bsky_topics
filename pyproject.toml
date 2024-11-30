@@ -1,0 +1,28 @@
+[project]
+name = "bsky-topics"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "alembic>=1.14.0",
+    "asyncpg>=0.30.0",
+    "click>=8.1.7",
+    "orjson>=3.10.12",
+    "rich>=13.9.4",
+    "sqlalchemy[asyncio]>=2.0.36",
+    "websockets>=14.1",
+    "zstd>=1.5.5.1",
+]
+
+[project.scripts]
+bsky-topics = "bsky_topics:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29.5",
+]
