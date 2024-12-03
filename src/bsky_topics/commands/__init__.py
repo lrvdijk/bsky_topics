@@ -1,11 +1,19 @@
+import logging
+
 import click
-import rich
+
+import rich.console
+import rich.logging
 
 from bsky_topics.config import Config
 from bsky_topics.db import configure_db
 
 
 DEFAULT_CONFIG_FILE = "env.toml"
+
+root_pkg = __name__[:__name__.find('.')]
+logger = logging.getLogger(root_pkg)
+logger.setLevel(logging.INFO)
 
 
 @click.group()
@@ -35,4 +43,8 @@ def cli_main(config=None):
     ctx.obj['db_engine'] = engine
 
     # Set up console output
-    ctx.obj['console'] = rich.Console()
+    ctx.obj['console'] = rich.console.Console()
+
+    # Setup logging handler
+    handler = rich.logging.RichHandler(console=ctx.obj['console'])
+    logging.basicConfig(format=r"[%(name)s] %(message)s", handlers=[handler])

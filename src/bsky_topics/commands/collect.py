@@ -10,6 +10,7 @@ from bsky_topics.jetstream import JetstreamCollector
 @click.pass_context
 def collect(ctx):
     config = ctx.obj['config']
+    console = ctx.obj['console']
 
-    collector = JetstreamCollector(config.ws_hostname)
+    collector = JetstreamCollector(console, config.ws_hostname)
     asyncio.run(collector.listen())
