@@ -3,7 +3,7 @@ name = "bsky-topics"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = "==3.12.*"
 dependencies = [
     "alembic>=1.14.0",
     "asyncpg>=0.30.0",
@@ -13,6 +13,20 @@ dependencies = [
     "sqlalchemy[asyncio]>=2.0.36",
     "websockets>=14.1",
     "zstd>=1.5.5.1",
+    "torch>=2.5.1",
+    "sentence-transformers>=3.3.1",
+    "wtpsplit>=2.1.1",
+    "bertopic>=0.16.4",
+    "pgvector>=0.3.6",
+    "hdbscan>=0.8.40",
+    "umap-learn>=0.5.7",
+    "tqdm>=4.67.1",
+    "seaborn>=0.13.2",
+    "plotly>=5.24.1",
+    "nbformat>=5.10.4",
+    "ipykernel>=6.29.5",
+    "ipywidgets>=8.1.5",
+    "jupyterlab>=4.3.4",
 ]
 
 [project.scripts]
@@ -22,7 +36,13 @@ bsky-topics = "bsky_topics:main"
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
-[dependency-groups]
-dev = [
-    "ipykernel>=6.29.5",
+# Configure pytorch package source
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu124", marker = "platform_system != 'Darwin'" },
 ]
+
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true

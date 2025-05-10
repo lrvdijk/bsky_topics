@@ -5,9 +5,16 @@ build/
 dist/
 wheels/
 *.egg-info
+.ipynb_checkpoints
 
 # Virtual environments
 .venv
 
 # Environment config
 env.toml
+
+# Saved models
+notebooks/saved_models
+
+.DS_Store
+

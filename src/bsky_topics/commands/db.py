@@ -1,6 +1,7 @@
 import asyncio
 
 import click
+from sqlalchemy import text
 from alembic.config import Config as AlembicConfig
 from alembic import command
 
@@ -28,4 +29,5 @@ def init(ctx, alembic_ini="alembic.ini"):
 
 async def init_db(engine):
     async with engine.begin() as conn:
+        await conn.execute(text('CREATE EXTENSION IF NOT EXISTS vector'))
         await conn.run_sync(Base.metadata.create_all)
